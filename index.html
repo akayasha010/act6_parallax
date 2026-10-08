@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>overlord</title>
+  <link rel="stylesheet" href="Css/miEstilos.css">
+</head>
+
+<body>
+  <!--nsv-->
+  <nav>
+    <ul>
+      <li><a href="#overlord">Overlord</a></li>
+      <li><a href="#temp1">Clattanoia</a></li>
+      <li><a href="#temp2">Go Cry Go</a></li>
+      <li><a href="#temp3">Voracity</a></li>
+      <li><a href="#temp4">Hollow Hunger</a></li>
+    </ul>
+  </nav>
+  <!--contenidos varios-->
+  <section class="contenido" id="overlord" data-audio="audio/hydra.mpeg">
+    <h1>openings Overlord</h1>
+  </section>
+
+  <section class="contenido" id="temp1" data-audio="audio/clattanoia.mpeg">
+    <h1>Opening I</h1>
+  </section>
+
+  <section class="contenido" id="temp2" data-audio="audio/go cry go.mpeg">
+    <h1>Opening II</h1>
+  </section>
+
+  <section class="contenido" id="temp3" data-audio="audio/voracity.mpeg">
+    <h1>Opening III</h1>
+  </section>
+
+  <section class="contenido" id="temp4" data-audio="audio/hollow hunger.mpeg">
+    <h1>Opening IV</h1>
+  </section>
+
+  <script>
+    const secciones = document.querySelectorAll(".contenido");
+
+    let audioActual = null;
+
+    const observer = new IntersectionObserver((entradas) => {
+
+        entradas.forEach(entrada => {
+
+            if (entrada.isIntersecting) {
+
+                if (audioActual) {
+                    audioActual.pause();
+                    audioActual.currentTime = 0;
+                }
+
+                audioActual = new Audio(entrada.target.dataset.audio);
+                audioActual.loop = true;
+                audioActual.volume = 0.5;
+
+                audioActual.play();
+            }
+
+        });
+
+        }, {
+            threshold: 0.5
+        });
+
+        secciones.forEach(seccion => observer.observe(seccion));
+    </script>
+</body>
+
+</html>
